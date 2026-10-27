@@ -407,3 +407,8 @@ Removes the rectangular lunar halo edge, adds recognizable clouds, improves ligh
 ### 1.9.37 — theme Up navigation
 
 Up from each theme swatch explicitly targets Automatic Appearance, avoiding the top Settings tab when geometric navigation favors its horizontal position. Hidden or disabled targets remain excluded and dialog scope is retained. Regression coverage includes all four theme positions.
+
+
+### 1.9.38 — distinct top navigation focus
+
+The active tab keeps a muted pill while focus is in page content. Returning remote focus to the top navigation brightens the pill and adds a subtle outline in both light and dark themes. The existing sliding pill and immediate tab switching remain.

@@ -719,3 +719,9 @@ body[data-theme=light] .app:hover,body[data-theme=light] .app:focus,body[data-th
 .compact .logo[data-brand=netflix] .brand-logo{width:29px;height:52px;max-width:29px;max-height:52px}
 .compact .logo .brand-logo{max-height:52px;max-width:125px}
 body[data-theme=light] .logo[data-brand=tubi] .brand-logo{filter:brightness(0)}
+
+/* Remote focus is brighter than the selected tab left behind while browsing. */
+header nav.nav-motion-ready .nav-selection{background:#bfc1c9}
+header nav.nav-motion-ready.nav-focused .nav-selection{background:#f5f5f8;box-shadow:inset 0 0 0 2px #fff,0 0 0 2px #ffffff26,0 5px 16px #00000024}
+body[data-theme=light] header nav.nav-motion-ready .nav-selection{background:#dce5eb;box-shadow:inset 0 1px 0 #ffffffa6,0 2px 6px #344f6512}
+body[data-theme=light] header nav.nav-motion-ready.nav-focused .nav-selection{background:#fff;box-shadow:inset 0 0 0 1px #fff,0 0 0 2px #647b944d,0 5px 16px #344f6524}

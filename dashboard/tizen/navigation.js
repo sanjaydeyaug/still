@@ -8,7 +8,9 @@ pill.className='nav-selection';pill.setAttribute('aria-hidden','true');nav.inser
 function update(){
  pending=false;
  var focused=document.activeElement;
- var target=nav.contains(focused)&&focused.matches('.nav')?focused:nav.querySelector('.nav.active');
+ var hasFocus=nav.contains(focused)&&focused.matches('.nav');
+ nav.classList.toggle('nav-focused',hasFocus);
+ var target=hasFocus?focused:nav.querySelector('.nav.active');
  if(!target)return;
  if(target===lastTarget&&ready)return;lastTarget=target;
  var box=target.getBoundingClientRect(),host=nav.getBoundingClientRect();

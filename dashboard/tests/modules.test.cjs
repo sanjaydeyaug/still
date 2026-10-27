@@ -47,5 +47,15 @@ test('Automatic Appearance returns Up to Settings even when Apps is geometricall
  assert.equal(next({querySelectorAll:()=>[apps,settings,automatic]},automatic,[0,-1]),settings);
  const html=fs.readFileSync(path.join(__dirname,'../tizen/index.html'),'utf8');
  assert.match(html,/id="auto-appearance" data-focus-up="nav-settings"/);
- assert.match(html,/id="nav-settings" data-view="settings"/);
+ assert.match(html,/id="nav-settings" data-focus-down="auto-appearance" data-view="settings"/);
+});
+test('Settings Down enters Automatic Appearance before the theme row and skips hidden targets',()=>{
+ const next=load('spatial-focus.js').StillFocus.next;
+ const element=(id,x,y,width=100)=>({id,getClientRects:()=>[{}],getBoundingClientRect:()=>({left:x,top:y,width,height:50})});
+ const settings=element('nav-settings',1500,50),automatic=element('auto-appearance',700,300,900),theme=element('light-theme',1450,400);
+ settings.getAttribute=name=>name==='data-focus-down'?'auto-appearance':null;
+ const scope={querySelectorAll:()=>[settings,automatic,theme]};
+ assert.equal(next(scope,settings,[0,1]),automatic);
+ automatic.getClientRects=()=>[];
+ assert.equal(next(scope,settings,[0,1]),theme);
 });

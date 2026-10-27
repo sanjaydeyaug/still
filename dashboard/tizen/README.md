@@ -417,3 +417,8 @@ The active tab keeps a muted pill while focus is in page content. Returning remo
 ### 1.9.39 — return from Appearance to Settings
 
 Up from Automatic Appearance explicitly returns to the top Settings tab, preventing geometric focus from landing on Apps and switching away.
+
+
+### 1.9.40 — enter Appearance from the top tab
+
+Down from the top Settings tab targets Automatic Appearance before the theme row. If the Appearance pane is hidden, normal visible-target navigation remains available.

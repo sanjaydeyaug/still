@@ -39,3 +39,13 @@ test('Up from every theme follows Automatic Appearance instead of the top Settin
   automatic.getClientRects=()=>[{}];
  }
 });
+test('Automatic Appearance returns Up to Settings even when Apps is geometrically closer',()=>{
+ const next=load('spatial-focus.js').StillFocus.next;
+ const element=(id,x,y,width=100)=>({id,getClientRects:()=>[{}],getBoundingClientRect:()=>({left:x,top:y,width,height:50})});
+ const settings=element('nav-settings',1500,50),apps=element('nav-apps',1000,50),automatic=element('auto-appearance',700,300,900);
+ automatic.getAttribute=name=>name==='data-focus-up'?'nav-settings':null;
+ assert.equal(next({querySelectorAll:()=>[apps,settings,automatic]},automatic,[0,-1]),settings);
+ const html=fs.readFileSync(path.join(__dirname,'../tizen/index.html'),'utf8');
+ assert.match(html,/id="auto-appearance" data-focus-up="nav-settings"/);
+ assert.match(html,/id="nav-settings" data-view="settings"/);
+});

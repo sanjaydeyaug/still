@@ -2,7 +2,7 @@
 
 A personal, remote-friendly home screen for Samsung Tizen TVs. Still brings favorite apps, local weather, a clock, and TV controls into a calm interface built with plain HTML, CSS, and JavaScript.
 
-**Current version: 1.9.38** · Installed and launched on a Samsung QN65S85FAFXZC · Tizen 6.0+ required by the manifest
+**Current version: 1.9.39** · Installed and launched on a Samsung QN65S85FAFXZC · Tizen 6.0+ required by the manifest
 
 ## Screenshots
 

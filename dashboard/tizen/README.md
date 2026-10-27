@@ -412,3 +412,8 @@ Up from each theme swatch explicitly targets Automatic Appearance, avoiding the 
 ### 1.9.38 — distinct top navigation focus
 
 The active tab keeps a muted pill while focus is in page content. Returning remote focus to the top navigation brightens the pill and adds a subtle outline in both light and dark themes. The existing sliding pill and immediate tab switching remain.
+
+
+### 1.9.39 — return from Appearance to Settings
+
+Up from Automatic Appearance explicitly returns to the top Settings tab, preventing geometric focus from landing on Apps and switching away.

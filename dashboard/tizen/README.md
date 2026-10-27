@@ -422,3 +422,8 @@ Up from Automatic Appearance explicitly returns to the top Settings tab, prevent
 ### 1.9.40 — enter Appearance from the top tab
 
 Down from the top Settings tab targets Automatic Appearance before the theme row. If the Appearance pane is hidden, normal visible-target navigation remains available.
+
+
+### 1.9.41 — hierarchical vertical navigation and input focus
+
+Up/Down follows successive control rows within the current page and Settings column, reserving same-row controls for Left/Right. The first control returns to its own top tab. Explicit neighbors, dialog scope, hidden/disabled filtering, scrolling and native keyboard handling remain. Focused inputs use a strong outline and contrasting fill; native keyboard editing uses a dashed outline.

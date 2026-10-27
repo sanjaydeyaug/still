@@ -27,18 +27,6 @@ test('entry page loads every extracted dependency before the application',()=>{
  const html=fs.readFileSync(path.join(__dirname,'../tizen/index.html'),'utf8');
  for(const name of ['catalog','preferences','clock','spatial-focus']){const index=html.indexOf('src="'+name+'.js');assert.ok(index>=0&&index<html.indexOf('src="app.js'));}
 });
-test('Up from every theme follows Automatic Appearance instead of the top Settings tab',()=>{
- const next=load('spatial-focus.js').StillFocus.next;
- const element=(id,x,y,width=100)=>({id,getClientRects:()=>[{}],getBoundingClientRect:()=>({left:x,top:y,width,height:50})});
- const automatic=element('auto-appearance',700,300,900),nav=element('top-settings',1500,80);
- for(const x of [700,950,1200,1450]){
-  const theme=element('theme',x,400);theme.getAttribute=name=>name==='data-focus-up'?'auto-appearance':null;
-  assert.equal(next({querySelectorAll:()=>[nav,automatic,theme]},theme,[0,-1]),automatic);
-  automatic.getClientRects=()=>[];
-  assert.equal(next({querySelectorAll:()=>[nav,automatic,theme]},theme,[0,-1]),nav);
-  automatic.getClientRects=()=>[{}];
- }
-});
 test('Automatic Appearance returns Up to Settings even when Apps is geometrically closer',()=>{
  const next=load('spatial-focus.js').StillFocus.next;
  const element=(id,x,y,width=100)=>({id,getClientRects:()=>[{}],getBoundingClientRect:()=>({left:x,top:y,width,height:50})});

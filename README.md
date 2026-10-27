@@ -2,7 +2,7 @@
 
 A personal, remote-friendly home screen for Samsung Tizen TVs. Still brings favorite apps, local weather, a clock, and TV controls into a calm interface built with plain HTML, CSS, and JavaScript.
 
-**Current version: 1.9.41** · Installed and launched on a Samsung QN65S85FAFXZC · Tizen 6.0+ required by the manifest
+**Current version: 1.9.42** · Installed and launched on a Samsung QN65S85FAFXZC · Tizen 6.0+ required by the manifest
 
 ## Screenshots
 
@@ -51,7 +51,7 @@ flowchart TD
 - **Application:** `app.js` composes views, search, and editing; `catalog.js` owns discovery rules, `preferences.js` owns saved settings, and `clock.js` owns clock updates. Hidden views render lazily; unchanged discovery results preserve focus and shelf position.
 - **Platform:** `platform.js` wraps public Tizen application, audio, system information, and TV window APIs. It supplies sample app entries when running in a desktop browser.
 - **Navigation:** `remote.js` normalizes Samsung keys, handles native text editing, and reveals focused items. `spatial-focus.js` selects directional focus targets. `navigation.js` animates the top navigation selection; `focus.js` contains a separate focus-frame implementation and is currently not loaded by the entry page.
-- **Presentation:** `style.css`, `logos.js`, and `layout.js` provide themes, app artwork, focus treatments, and viewport sizing.
+- **Presentation:** `style.css`, the shared `liquid-glass.css` visual layer, `logos.js`, and `layout.js` provide themes, app artwork, focus treatments, and viewport sizing.
 - **Weather:** `weather.js` handles location, forecasts, cached data, and weather scenes; `appearance.js` selects manual or automatic themes.
 
 See [module boundaries and extension guidance](docs/architecture.md) for the architecture and public interfaces.

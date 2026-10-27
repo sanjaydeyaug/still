@@ -427,3 +427,8 @@ Down from the top Settings tab targets Automatic Appearance before the theme row
 ### 1.9.41 — hierarchical vertical navigation and input focus
 
 Up/Down follows successive control rows within the current page and Settings column, reserving same-row controls for Left/Right. The first control returns to its own top tab. Explicit neighbors, dialog scope, hidden/disabled filtering, scrolling and native keyboard handling remain. Focused inputs use a strong outline and contrasting fill; native keyboard editing uses a dashed outline.
+
+
+### 1.9.42 — unified glass visual system
+
+Adds liquid-glass.css as the shared presentation layer: floating navigation, focus-responsive app tiles, consistent panels and sheets, inset text fields, Settings categories, type, spacing, and corner hierarchy in light/dark appearances. Brand artwork and hierarchical remote navigation remain. TV rendering avoids live backdrop blur; reduced-motion and reduced-transparency preferences have fallbacks. This is an Apple-inspired Tizen adaptation, not Apple's native material renderer.

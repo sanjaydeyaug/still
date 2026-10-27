@@ -1,0 +1,153 @@
+/* Shared visual system. Content rests quietly; navigation and focus float above it.
+   Native TV uses the same highlights without live backdrop-filter passes. */
+body{
+ --lg-surface:rgba(35,38,45,.78);--lg-content:rgba(30,33,39,.94);
+ --lg-field:rgba(9,13,20,.32);--lg-edge:rgba(255,255,255,.13);
+ --lg-sheen:rgba(255,255,255,.16);--lg-shadow:0 10px 28px rgba(0,0,0,.16);
+ --lg-focus:rgba(75,84,102,.94);--lg-focus-edge:rgba(255,255,255,.82);
+ --lg-ring:#dce8ff;--lg-ink:#f5f5f7;--lg-secondary:#b0b4bf;--lg-focus-secondary:#e1e5ee;
+ font-family:-apple-system,BlinkMacSystemFont,'Helvetica Neue',Arial,sans-serif;
+ -webkit-font-smoothing:antialiased;color:var(--lg-ink);
+}
+body[data-theme=light]{
+ --lg-surface:rgba(250,253,255,.77);--lg-content:rgba(249,252,255,.94);
+ --lg-field:rgba(94,119,147,.065);--lg-edge:rgba(255,255,255,.85);
+ --lg-sheen:rgba(255,255,255,.86);--lg-shadow:0 9px 26px rgba(38,61,87,.09);
+ --lg-focus:rgba(255,255,255,.98);--lg-focus-edge:rgba(78,107,144,.58);
+ --lg-ring:#4c6d98;--lg-ink:#202b39;--lg-secondary:#596a7d;--lg-focus-secondary:#52677f;
+ --text:#202b39;--muted:#596a7d;--line:rgba(63,86,111,.14);
+ background:linear-gradient(135deg,#e9eff4,#e3eaf1 55%,#eaf0f5);
+}
+body[data-theme=warm]{--lg-surface:rgba(54,45,39,.8);--lg-content:rgba(43,37,33,.95);--lg-focus:rgba(101,86,72,.96)}
+body[data-theme=black]{--lg-content:rgba(23,25,30,.96);background:#000}
+body[data-theme=charcoal]{--lg-content:rgba(33,36,43,.96)}
+body:not([data-theme=light]){--text:var(--lg-ink);--muted:var(--lg-secondary)}
+h1,h2,.brand,.app-name{font-family:inherit}
+h1{font-weight:500;letter-spacing:-.045em}
+h2{font-weight:500;letter-spacing:-.025em}
+.eyebrow{letter-spacing:.15em}
+.hint,.intro,.setting-description,.settings-intro,.settings-guidance{color:var(--lg-secondary)}
+button,input{transition:transform 240ms cubic-bezier(.2,.8,.2,1),background-color 180ms ease,box-shadow 180ms ease,border-color 180ms ease,color 180ms ease}
+
+/* Navigation is a single floating capsule, with one moving selection. */
+body header nav{
+ padding:7px;gap:10px;border:1px solid var(--lg-edge);border-radius:44px;
+ background:linear-gradient(150deg,var(--lg-sheen),transparent 45%),var(--lg-surface);
+ box-shadow:inset 0 1px 0 var(--lg-sheen),inset 0 -1px 0 #ffffff08,var(--lg-shadow);
+ -webkit-backdrop-filter:blur(24px) saturate(125%);backdrop-filter:blur(24px) saturate(125%);
+}
+body header nav.nav-motion-ready .nav{font-size:clamp(16px,1.15vw,22px);padding:15px 28px;min-width:100px;border:0;border-radius:36px;color:var(--lg-secondary)}
+body header nav.nav-motion-ready .nav.nav-highlighted{color:#202631}
+body header nav.nav-motion-ready .nav-selection{border-radius:36px;background:linear-gradient(150deg,#e0e4ec,#b7bdca);box-shadow:inset 0 1px 0 #ffffff80,0 2px 8px #00000014}
+body header nav.nav-motion-ready.nav-focused .nav-selection{background:linear-gradient(150deg,#fff,#e8edf7);box-shadow:inset 0 1px 0 #fff,0 0 0 2px #ffffff38,0 6px 18px #00000020}
+body[data-theme=light] header nav.nav-motion-ready .nav-selection{background:linear-gradient(150deg,#eef4fa,#d2dce8);box-shadow:inset 0 1px 0 #fff,0 2px 8px #38516d10}
+body[data-theme=light] header nav.nav-motion-ready.nav-focused .nav-selection{background:linear-gradient(150deg,#fff,#f2f7ff);box-shadow:inset 0 1px 0 #fff,0 0 0 2px #54749a55,0 6px 18px #38516d18}
+
+/* App content stays readable. Focus adds a glass highlight and modest lift. */
+body .app,body[data-theme=light] .app{
+ background:linear-gradient(155deg,rgba(255,255,255,.045),transparent 58%),var(--lg-content);
+ border:1px solid var(--lg-edge);border-radius:24px;
+ box-shadow:inset 0 1px 0 var(--lg-sheen),0 4px 14px #0000000b;
+ -webkit-backdrop-filter:none;backdrop-filter:none;
+}
+body .app:focus,body .app:focus-visible,body .app:hover,
+body[data-theme=light] .app:focus,body[data-theme=light] .app:hover{
+ background:linear-gradient(150deg,var(--lg-sheen),transparent 56%),var(--lg-focus);
+ border-color:var(--lg-focus-edge);box-shadow:inset 0 1px 0 var(--lg-sheen),0 0 0 2px var(--lg-edge),0 14px 30px #00000026;
+ transform:scale(1.075);outline:none;
+}
+.app-name{font-size:18px;font-weight:500;color:var(--lg-ink);line-height:1.4}
+.logo{margin-bottom:16px}
+#library{gap:28px}
+#favorites,#results{gap:24px}
+
+/* Panels and sheets share one restrained material, without nested glass stacks. */
+body .panel,body .store-panel,body .store-callout,body .note,body dialog,
+body[data-theme=light] .panel,body[data-theme=light] .store-panel,
+body[data-theme=light] .store-callout,body[data-theme=light] .note,body[data-theme=light] dialog{
+ background:linear-gradient(150deg,var(--lg-sheen),transparent 42%),var(--lg-surface);
+ border:1px solid var(--lg-edge);border-radius:28px;
+ box-shadow:inset 0 1px 0 var(--lg-sheen),var(--lg-shadow);
+}
+body dialog,body[data-theme=light] dialog{padding:32px;border-radius:32px;-webkit-backdrop-filter:blur(28px);backdrop-filter:blur(28px)}
+dialog h2{font-size:30px;line-height:1.15;letter-spacing:-.035em}
+dialog::backdrop{background:rgba(0,0,0,.55);-webkit-backdrop-filter:blur(5px);backdrop-filter:blur(5px)}
+body[data-theme=light] dialog::backdrop{background:rgba(43,58,79,.22)}
+body .note{padding:20px 80px 20px 24px!important}
+body .note .eyebrow{font-size:10px;margin-bottom:8px}
+body .note .edit{top:25px;right:24px}
+body .note:focus{outline:2px solid var(--lg-focus-edge);outline-offset:3px;transform:none!important}
+
+/* Control material and focus language apply in every page and dialog. */
+body .subtle,body .round,body .tool,body .accent,
+body[data-theme=light] .subtle,body[data-theme=light] .round,body[data-theme=light] .tool{
+ background:linear-gradient(150deg,var(--lg-sheen),transparent 70%),var(--lg-field);
+ border:1px solid var(--lg-edge);border-radius:16px;color:var(--lg-ink);
+ box-shadow:inset 0 1px 0 var(--lg-sheen),0 2px 6px #00000008;
+}
+body .accent{background:linear-gradient(150deg,#ffffff40,transparent),#dce5f5;color:#202b39;border-color:#ffffff70}
+body[data-theme=light] .accent{background:linear-gradient(150deg,#ffffff20,transparent),#3d5c85;color:#fff;border-color:#ffffff28}
+body .round{border-radius:50%}
+body .subtle:focus,body .round:focus,body .tool:focus,body .accent:focus,
+body[data-theme=light] .subtle:focus,body[data-theme=light] .round:focus{
+ background:linear-gradient(150deg,var(--lg-sheen),transparent),var(--lg-focus);color:var(--lg-ink);
+ border-color:var(--lg-focus-edge);outline:2px solid var(--lg-focus-edge);outline-offset:3px;
+ box-shadow:inset 0 1px 0 var(--lg-sheen),0 8px 22px #00000018;transform:scale(1.025);
+}
+#manage-favorites,#edit-apps{color:var(--lg-secondary)}
+#manage-favorites:focus,#edit-apps:focus{color:var(--lg-ink);outline:2px solid var(--lg-focus-edge);outline-offset:5px;border-radius:12px}
+
+/* Search and form fields use the same inset surface and unmistakable focus. */
+body .search-box,body[data-theme=light] .search-box{padding:14px 22px;border:1px solid var(--lg-edge);border-radius:24px;background:var(--lg-surface);box-shadow:inset 0 1px 0 var(--lg-sheen),var(--lg-shadow)}
+body dialog input,body:not([data-theme=light]) dialog input,
+body[data-theme=light] dialog input,body .search-box input{
+ border:1px solid var(--lg-edge);border-radius:12px;background:var(--lg-field);color:var(--lg-ink);box-shadow:none;padding:14px 16px;
+}
+body .search-box input{background:transparent;border-color:transparent;font-size:24px}
+body dialog input:focus,body:not([data-theme=light]) dialog input:focus,
+body .search-box input:focus,body[data-theme=light] dialog input:focus,body[data-theme=light] .search-box input:focus{
+ background:var(--lg-focus);color:var(--lg-ink);border-color:var(--lg-ring);
+ outline:2px solid var(--lg-ring);outline-offset:3px;box-shadow:0 0 0 6px #9ab7ed12;
+}
+body input:focus::placeholder{color:var(--lg-focus-secondary)}
+body.tv-rendering input:focus:not([readonly]){outline-style:dashed}
+body #clear-search:focus{background:var(--lg-focus);outline:2px solid var(--lg-ring);outline-offset:3px;color:var(--lg-ink)}
+
+/* Settings uses one content sheet beside a quiet category list. */
+.settings-detail{border-left:0;padding:0;}
+#settings-view .settings-pane{padding:28px 32px;border-radius:28px;background:var(--lg-content);border:1px solid var(--lg-edge);box-shadow:inset 0 1px 0 var(--lg-sheen),var(--lg-shadow)}
+#settings-view .settings-pane h2{font-size:34px;letter-spacing:-.035em}
+#settings-view .setting-row{border-radius:14px;border-bottom-color:var(--line);padding:16px;min-height:64px;font-size:22px}
+#settings-view .theme-row{margin:20px 0;gap:12px}
+#settings-view .swatch{border-radius:16px;min-height:66px;box-shadow:inset 0 1px 0 #ffffff25}
+#settings-view .swatch[aria-pressed=true]{outline:none;box-shadow:inset 0 0 0 2px var(--lg-focus-edge)}
+#settings-view .settings-category{border-radius:20px;font-size:26px;padding:18px 22px}
+#settings-view .settings-category[aria-current=true],body[data-theme=light] #settings-view .settings-category[aria-current=true]{background:var(--lg-surface);border-color:var(--lg-edge);box-shadow:inset 0 1px 0 var(--lg-sheen)}
+#settings-view button:focus,body[data-theme=light] #settings-view button:focus,
+#settings-view .settings-category:focus,#settings-view .settings-category[aria-current=true]:focus{
+ background:linear-gradient(150deg,var(--lg-sheen),transparent 65%),var(--lg-focus);
+ color:var(--lg-ink);border-color:var(--lg-focus-edge);outline:2px solid var(--lg-focus-edge);outline-offset:2px;
+ box-shadow:inset 0 1px 0 var(--lg-sheen),0 8px 22px #00000018;border-radius:16px;transform:scale(1.015);
+}
+#settings-view button:focus .setting-description,#settings-view button:focus>span:last-child{color:var(--lg-focus-secondary)}
+#settings-view .settings-category:focus>span{color:inherit}
+#settings-view .round:focus{border-radius:50%}
+#settings-view .ios-switch{box-shadow:inset 0 1px 2px #00000018}
+#settings-view .preference-switch:focus .ios-switch,#settings-view #auto-appearance:focus .ios-switch{background:#707b8a}
+#settings-view .preference-switch[aria-checked=true]:focus .ios-switch,#settings-view #auto-appearance[aria-checked=true]:focus .ios-switch{background:#30a65a}
+
+/* A balanced home composition preserves the user's portrait and live weather. */
+#home-view .home-minimal .home-portrait{width:clamp(280px,25vw,460px);height:clamp(340px,43vh,460px);margin-top:-22px;margin-bottom:-22px}
+#home-view .home-minimal .home-copy h1{font-weight:500;letter-spacing:-.04em;font-size:clamp(30px,2.35vw,45px)}
+.clock{font-weight:300;letter-spacing:-.055em}
+#home-view #weather-card:focus{outline:2px solid var(--lg-focus-edge);outline-offset:6px;border-radius:12px;background:var(--lg-field)}
+#preview-banner{letter-spacing:.12em}
+
+/* Keep the TV's paint budget predictable. */
+body.tv-rendering header nav,body.tv-rendering dialog,body.tv-rendering .panel,
+body.tv-rendering .search-box,body.tv-rendering .note,body.tv-rendering .store-panel,
+body.tv-rendering .store-callout,body.tv-rendering dialog::backdrop{-webkit-backdrop-filter:none;backdrop-filter:none}
+@media(max-width:1100px){#settings-view .settings-pane{padding:24px}.settings-layout{gap:26px}.settings-detail{padding-top:8px}#home-view .home-minimal .home-portrait{width:clamp(260px,36vw,400px);height:360px;margin:0}}
+@media(max-width:550px){body header nav.nav-motion-ready .nav{min-width:0;padding:12px 16px;font-size:15px}#settings-view .settings-category{font-size:19px}#settings-view .settings-pane{padding:20px}#home-view .home-minimal .home-portrait{width:45%;height:260px}}
+@media(prefers-reduced-motion:reduce){body button,body input,body .app,body .nav-selection{transition:none!important}}
+@media(prefers-reduced-transparency:reduce),(prefers-contrast:more){body{--lg-surface:var(--panel);--lg-content:var(--panel);--lg-edge:var(--muted)}body header nav,body dialog,body .search-box{-webkit-backdrop-filter:none;backdrop-filter:none}}

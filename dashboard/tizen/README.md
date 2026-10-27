@@ -402,3 +402,8 @@ Selected category background had higher specificity than the general bright focu
 ### 1.9.36 — weather clarity, app artwork and immediate tabs
 
 Removes the rectangular lunar halo edge, adds recognizable clouds, improves light-theme precipitation contrast, and renders branched snowflakes sized by snowfall intensity. App tiles use opaque surfaces with balanced logo sizing and readable Tubi artwork. Focusing a top navigation item switches its page immediately while retaining navigation focus. Local light/dark previews verified; deployment results are reported separately.
+
+
+### 1.9.37 — theme Up navigation
+
+Up from each theme swatch explicitly targets Automatic Appearance, avoiding the top Settings tab when geometric navigation favors its horizontal position. Hidden or disabled targets remain excluded and dialog scope is retained. Regression coverage includes all four theme positions.

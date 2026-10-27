@@ -8,6 +8,15 @@
     ).filter(function (element) { return element.getClientRects().length > 0; });
     if (elements.indexOf(current) < 0) return elements[0] || null;
 
+    // Explicit neighbors keep wide Settings rows from losing to a nearer
+    // navigation button when their centers are far apart horizontally.
+    var axis = direction[1] < 0 ? 'up' : direction[1] > 0 ? 'down' : direction[0] < 0 ? 'left' : 'right';
+    var neighborId = current.getAttribute && current.getAttribute('data-focus-' + axis);
+    if (neighborId) {
+      var neighbor = elements.filter(function (element) { return element.id === neighborId; })[0];
+      if (neighbor) return neighbor;
+    }
+
     var rect = current.getBoundingClientRect();
     var x = rect.left + rect.width / 2;
     var y = rect.top + rect.height / 2;

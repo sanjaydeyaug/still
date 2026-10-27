@@ -397,3 +397,8 @@ Replaces text On/Off values for 24-hour clock, compact tiles and reminder with a
 ### 1.9.35 — Settings sidebar focus contrast
 
 Selected category background had higher specificity than the general bright focus background, leaving dark focused text on a dark selected surface. Explicit category focus rules now keep a bright surface and dark readable labels together, including the selected category. All 61 tests passed. Signed `.tools/Still-1935.wgt`; TV upload failed when the SDB connection dropped, and reconnect to 10.0.0.4:26101 failed. After restarting the local SDB server, reconnected successfully, directly installed the signed update (100%, install completed), and launched StillHome1.Dashboard successfully. Physical TV contrast confirmation remains pending.
+
+
+### 1.9.36 — weather clarity, app artwork and immediate tabs
+
+Removes the rectangular lunar halo edge, adds recognizable clouds, improves light-theme precipitation contrast, and renders branched snowflakes sized by snowfall intensity. App tiles use opaque surfaces with balanced logo sizing and readable Tubi artwork. Focusing a top navigation item switches its page immediately while retaining navigation focus. Local light/dark previews verified; deployment results are reported separately.

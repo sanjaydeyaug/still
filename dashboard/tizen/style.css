@@ -463,7 +463,7 @@ body:not([data-theme=light]) .search-box:focus-within{
 .home-weather[data-sky] .sky-glow{display:block;background:radial-gradient(ellipse at 100% 0%,#b5c9de26,transparent 70%)}
 .home-weather[data-sky=sun] .sky-glow,.home-weather[data-sky=partly] .sky-glow{background:radial-gradient(ellipse at 100% 0%,#f7cd6655,transparent 65%);animation:sky-breathe 12s ease-in-out infinite alternate}
 .home-weather[data-night=true] .sky-glow{background:radial-gradient(ellipse at 100% 0%,#809de63a,transparent 65%)}
-.home-weather[data-sky=cloud] .sky-clouds,.home-weather[data-sky=partly] .sky-clouds,.home-weather[data-sky=rain] .sky-clouds,.home-weather[data-sky=storm] .sky-clouds{display:block;background:radial-gradient(ellipse at 20% 10%,#96a8b23d,transparent 55%),radial-gradient(ellipse at 80% 30%,#99aeb333,transparent 60%);animation:sky-drift 24s ease-in-out infinite alternate}
+.home-weather[data-sky=cloud] .sky-clouds,.home-weather[data-sky=partly] .sky-clouds,.home-weather[data-sky=rain] .sky-clouds,.home-weather[data-sky=storm] .sky-clouds,.home-weather[data-sky=snow] .sky-clouds{display:block;background:radial-gradient(ellipse at 20% 10%,#96a8b23d,transparent 55%),radial-gradient(ellipse at 80% 30%,#99aeb333,transparent 60%);animation:sky-drift 24s ease-in-out infinite alternate}
 .home-weather[data-sky=fog] .sky-mist{display:block;background:repeating-linear-gradient(175deg,transparent 0,transparent 40px,#a5b7bf20 65px,transparent 110px);animation:sky-drift 20s ease-in-out infinite alternate}
 .home-weather[data-sky=rain] .sky-drops,.home-weather[data-sky=storm] .sky-drops,.home-weather[data-sky=snow] .sky-drops{display:block}
 .sky-drops i{position:absolute;top:-30px;width:2px;height:22px;background:linear-gradient(transparent,#8db5d9b3);animation:sky-fall 1.15s linear infinite}
@@ -471,8 +471,11 @@ body:not([data-theme=light]) .search-box:focus-within{
 .home-weather[data-intensity=light] .sky-drops i{height:14px;animation-duration:1.8s;opacity:.65}
 .home-weather[data-intensity=drizzle] .sky-drops i:nth-child(n+9),.home-weather[data-intensity=light] .sky-drops i:nth-child(n+15),.home-weather[data-intensity=moderate] .sky-drops i:nth-child(n+25){display:none}
 .home-weather[data-intensity=heavy] .sky-drops i{height:32px;animation-duration:.75s}
-.home-weather[data-sky=snow] .sky-drops i{width:5px;height:5px;border-radius:50%;background:#b3c8da;animation-name:sky-snow;animation-duration:7s}
-.home-weather[data-sky=snow][data-intensity=heavy] .sky-drops i{animation-duration:4s}
+.home-weather[data-sky=snow] .sky-drops i{width:12px;height:12px;border-radius:0;background:transparent url("icons/weather/snowflake.svg") center/contain no-repeat;animation-name:sky-snow;animation-duration:7s}
+.home-weather[data-sky=snow][data-intensity=light] .sky-drops i{width:9px;height:9px;animation-duration:9s}
+.home-weather[data-sky=snow][data-intensity=heavy] .sky-drops i{width:15px;height:15px;animation-duration:4s}
+body[data-theme=light] .home-weather[data-sky=snow] .sky-drops i{filter:brightness(.48) saturate(.8)}
+body[data-theme=light] .home-weather .sky-hail i{background:#55718a}
 @keyframes sky-fall{from{transform:translate(30px,-20px)}to{transform:translate(-70px,48vh)}}
 @keyframes sky-snow{from{transform:translate(30px,-20px);opacity:0}20%{opacity:.8}to{transform:translate(-55px,48vh);opacity:0}}
 @keyframes sky-drift{from{transform:translateX(-3%);opacity:.5}to{transform:translateX(3%);opacity:1}}
@@ -502,6 +505,17 @@ body:not([data-theme=light]) .search-box:focus-within{
 .sky-hail i{position:absolute;top:-10px;width:6px;height:6px;border-radius:45%;background:#c1d3e9;animation:sky-fall 1s linear infinite}
 .home-weather[data-ice=true] .sky-drops i{background:linear-gradient(transparent,#b8dbeae6)}
 .home-weather[data-windy=true] .sky-clouds{animation-duration:8s}
+/* Rounded cloud banks stay recognizable against both appearance themes. */
+.home-weather .sky-clouds{--cloud-color:rgb(188,204,220)}
+body[data-theme=light] .home-weather .sky-clouds{--cloud-color:rgb(91,113,134)}
+.sky-clouds:before,.sky-clouds:after{content:'';position:absolute;right:50px;top:92px;width:320px;height:140px;background:radial-gradient(ellipse 145px 34px at 50% 72%,var(--cloud-color) 96%,transparent 100%),radial-gradient(circle 48px at 28% 53%,var(--cloud-color) 96%,transparent 100%),radial-gradient(circle 65px at 50% 47%,var(--cloud-color) 96%,transparent 100%),radial-gradient(circle 46px at 73% 57%,var(--cloud-color) 96%,transparent 100%);filter:blur(3px);opacity:.48}
+.sky-clouds:after{top:128px;right:330px;transform:scale(.7);opacity:.3}
+.home-weather[data-sky=partly] .sky-clouds:before{transform:scale(.7);transform-origin:100% 50%;opacity:.3}
+.home-weather[data-sky=partly] .sky-clouds:after{display:none}
+body[data-theme=light] .home-weather[data-sky=rain] .sky-drops i,
+body[data-theme=light] .home-weather[data-sky=storm] .sky-drops i{background:linear-gradient(transparent,rgba(48,91,129,.85))}
+.home-weather[data-sky=storm] .sky-lightning{top:170px;right:145px;height:100px}
+body[data-theme=light] .home-weather[data-sky=storm] .sky-lightning{background:linear-gradient(#55679c,#7d71b7)}
 .home-weather[data-windy=true] .sky-drops i{animation-name:sky-windfall}
 @keyframes sky-windfall{from{transform:translate(60px,-20px)}to{transform:translate(-180px,48vh)}}
 @media(prefers-reduced-motion:reduce){.home-weather .sky-lightning,.home-weather .sky-hail{display:none!important}}
@@ -635,7 +649,7 @@ body[data-theme=light] #settings-view .settings-category:focus{background:#fff}
 
 /* Only the illuminated lunar surface glows; the unlit area stays transparent. */
 .home-weather[data-night=true][data-sky=night] .sky-moon,
-.home-weather[data-night=true][data-sky=partly] .sky-moon{background:none;box-shadow:none;top:10px;right:10px;overflow:visible}
+.home-weather[data-night=true][data-sky=partly] .sky-moon{background:none;box-shadow:none;top:48px;right:48px;overflow:visible}
 .sky-moon svg{display:block;width:100%;height:100%;filter:drop-shadow(0 0 9px #c5d7f54d)}
 
 /* A small static canvas supplies real surface detail and gradual lunar shading. */
@@ -644,8 +658,10 @@ body[data-theme=light] #settings-view .settings-category:focus{background:#fff}
 .sky-moon svg{filter:none}
 
 /* Soft illustrated moonlight around the real lunar surface. No pulsing. */
+/* The moon's 48px screen inset leaves room for the 45px halo inside the
+   clipped weather scene, including on mainly-clear nights. */
 .sky-moon{isolation:isolate}
-.sky-moon:before{content:'';position:absolute;inset:-45px;z-index:-1;pointer-events:none;background:radial-gradient(ellipse at var(--moon-halo-x,50%) 50%,#fff0bdb3 0%,#e9e5c880 24%,#c9dcee40 42%,transparent 68%);opacity:var(--moon-halo-opacity,0)}
+.sky-moon:before{content:'';position:absolute;inset:-45px;z-index:-1;pointer-events:none;background:radial-gradient(ellipse closest-side at var(--moon-halo-x,50%) 50%,#fff0bdb3 0%,#e9e5c880 24%,#c9dcee40 55%,transparent 100%);opacity:var(--moon-halo-opacity,0)}
 .sky-moon canvas{filter:sepia(.12) saturate(.75) brightness(1.14);opacity:.98}
 
 /* The watercolor asset supplies the illustration style directly. */
@@ -686,3 +702,20 @@ body[data-theme=black] dialog::backdrop{background:rgba(0,0,0,.8)}
 #settings-view .settings-category:focus,
 #settings-view .settings-category[aria-current=true]:focus{background:#f4f4f7;color:#161619;border-color:transparent}
 #settings-view .settings-category:focus>span{color:inherit}
+
+/* Quiet, opaque app tiles keep artwork crisp instead of tinting it with glass. */
+.app{background:#191a1e;border:1px solid #ffffff12;border-radius:22px;box-shadow:0 4px 12px #00000012;-webkit-backdrop-filter:none;backdrop-filter:none}
+body[data-theme=light] .app{background:#f9fbfc;border:1px solid #ffffff;box-shadow:0 4px 14px #24384b0c}
+.app:hover,.app:focus,.app:focus-visible{background:#292b31;border-color:#ffffff80;box-shadow:0 12px 26px #0003}
+body[data-theme=light] .app:hover,body[data-theme=light] .app:focus,body[data-theme=light] .app:focus-visible{background:#fff;border-color:#8494a5;box-shadow:0 12px 26px #24384b20}
+.logo{padding:8px 4px}
+.logo .brand-logo{max-width:148px;max-height:72px}
+.logo[data-brand=netflix] .brand-logo{width:44px;height:80px;max-width:44px;max-height:80px;flex-shrink:1}
+.logo[data-brand=prime] .brand-logo,.logo[data-brand=disney] .brand-logo{padding:0;max-width:142px;max-height:68px}
+.logo[data-brand=tvplus] .brand-logo{max-width:158px;max-height:72px}
+.logo[data-brand=smartstb] .brand-logo{max-width:118px;max-height:66px}
+.logo[data-brand=hoichoi] .brand-logo{max-width:145px;max-height:62px}
+.app-name{font-size:18px;font-weight:400;letter-spacing:0}
+.compact .logo[data-brand=netflix] .brand-logo{width:29px;height:52px;max-width:29px;max-height:52px}
+.compact .logo .brand-logo{max-height:52px;max-width:125px}
+body[data-theme=light] .logo[data-brand=tubi] .brand-logo{filter:brightness(0)}
